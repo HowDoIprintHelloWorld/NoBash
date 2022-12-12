@@ -23,6 +23,10 @@ class Lexer():
     strMode = False
     tok = ""
 
+    self.inpt = self.inpt.replace("==", "iseq")
+    self.inpt = self.inpt.replace(">=", "isgr")
+    self.inpt = self.inpt.replace("<=", "issm")
+
     
     for l in self.inpt:
       if l == '"':

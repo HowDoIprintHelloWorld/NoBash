@@ -53,12 +53,12 @@ class Token():
       self.val = ty.Str(self.val[1:-1])
       self.type = "string"
 
-    # String
+    
     elif tok in types.keys():
       self.type = types[tok]
       if self.type == "bool":
-        self.val = bool(self.val)
-        self.val = ty.bool(self.val)
+        self.val = True if tok == "True" else False
+        self.val = ty.bool(val=self.val)
 
 
     # If none of the others, undefined 

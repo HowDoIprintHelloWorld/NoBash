@@ -13,6 +13,6 @@ fh.loadPy("libs.std")
 for i, line in enumerate(lines):
   i += 1
   l.lex(line, i)
-  print(l.toks)
+  #print(l.toks)
   ex.execute(l.toks, "globe", i, )
   

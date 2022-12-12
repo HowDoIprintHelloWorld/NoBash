@@ -57,7 +57,7 @@ class bool(Base):
   def __init__(self, val=None):
     super().__init__()
     self.value = True
-    if val:
+    if val != None:
       self.set(val)
 
 
@@ -97,6 +97,8 @@ class Func(Base):
     self.pyFunc = None
 
   def checkArgs(self, args, line):
+    if not args:
+      return
     if len(args) != self.argsLen:
       panic(f"Function '{self.value}' given {str(len(args))} arguments on line {str(line)} when {str(self.argsLen)} can be given")
 
@@ -107,11 +109,21 @@ class Func(Base):
     for arg in args:
       if arg:
         newA.append(arg[0].val)
+
+    if not self.argsLen:
+      return None
+      
     return newA
 
 
   def run(self, args, line):
-    self.checkArgs(args, line)
     args = self.makeArgs(args)
+    self.checkArgs(args, line)
     if self.pyFunc:
-      self.pyFunc(*args)
+      if args:
+        res = self.pyFunc(*args)
+      else:
+        res = [self.pyFunc()]
+
+
+    return res
